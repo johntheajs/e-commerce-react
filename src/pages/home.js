@@ -62,6 +62,7 @@ function Home() {
       ({ _id, img, title, reviews, prevPrice, newPrice }) => (
         <Card
           key={_id}
+          productId={_id}
           img={img}
           title={title}
           star={<AiFillStar className="rating-star" />}
