@@ -10,13 +10,22 @@ const Nav = ({ handleInputChange, query }) => {
   const navigate = useNavigate();
   const { totalNoOfProducts } = useContext(CartContext); // Access totalNoOfProducts
 
-  const handleSubmit = async (e) => {
+  const loginNavigate = async (e) => {
     try {
       navigate("/"); // Redirect to login after successful signup
     } catch (err) {
       console.log(err);
     }
   };
+
+  const cartNavigate = async (e) => {
+    try {
+      navigate("/cart"); // Redirect to login after successful signup
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   return (
     <nav>
@@ -33,7 +42,7 @@ const Nav = ({ handleInputChange, query }) => {
         <a href="">
           <FiHeart className="nav-icons" />
         </a>
-        <a href="">
+        <a onClick={cartNavigate}>
           <div className="cart-icon-container">
             <AiOutlineShoppingCart className="nav-icons" />
             {totalNoOfProducts > 0 && ( // Only show the badge if totalNoOfProducts is greater than 0
@@ -44,7 +53,7 @@ const Nav = ({ handleInputChange, query }) => {
         <a href="">
           <AiOutlineUserAdd className="nav-icons" />
         </a>
-        <a onClick={handleSubmit}>
+        <a onClick={loginNavigate}>
           <IoIosLogOut className="nav-icons" />
         </a>
       </div>
