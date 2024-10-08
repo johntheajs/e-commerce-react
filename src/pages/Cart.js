@@ -1,10 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { CartContext } from '../context/cartContext';
 import Nav from '../Navigation/Nav';
 import './Cart.css';
 
 const Cart = () => {
   const { cart, totalCost } = useContext(CartContext);
+
+  // Lifecycle simulation with useEffect for componentDidMount and componentWillUnmount
+  useEffect(() => {
+    console.log('Component mounted');
+
+    return () => {
+      console.log('Component unmounted');
+    };
+  }, []); // Empty dependency array to run only on mount and unmount
 
   return (
     <>
@@ -19,12 +28,18 @@ const Cart = () => {
             <div className="cart-items">
               {cart.map((item) => (
                 <div key={item.productId._id} className="cart-item">
-                  <img src={item.productId.img} alt={item.productId.title} className="cart-item-img" />
+                  <img
+                    src={item.productId.img}
+                    alt={item.productId.title}
+                    className="cart-item-img"
+                  />
                   <div className="cart-item-details">
                     <p className="cart-item-title">{item.productId.title}</p>
                     <p className="cart-item-price">Price: ${item.price}</p>
                     <p className="cart-item-count">Count: {item.count}</p>
-                    <p className="cart-item-amount">Amount: ${item.price * item.count}</p>
+                    <p className="cart-item-amount">
+                      Amount: ${item.price * item.count}
+                    </p>
                   </div>
                 </div>
               ))}
