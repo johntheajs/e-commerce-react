@@ -1,8 +1,23 @@
 import { FiHeart } from "react-icons/fi";
 import { AiOutlineShoppingCart, AiOutlineUserAdd } from "react-icons/ai";
+import { IoIosLogOut } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react"; // Import useContext
+import { CartContext } from "../context/cartContext"; // Import CartContext
 import "./Nav.css";
 
 const Nav = ({ handleInputChange, query }) => {
+  const navigate = useNavigate();
+  const { totalNoOfProducts } = useContext(CartContext); // Access totalNoOfProducts
+
+  const handleSubmit = async (e) => {
+    try {
+      navigate("/"); // Redirect to login after successful signup
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <nav>
       <div className="nav-container">
@@ -15,14 +30,22 @@ const Nav = ({ handleInputChange, query }) => {
         />
       </div>
       <div className="profile-container">
-        <a href="#">
+        <a href="">
           <FiHeart className="nav-icons" />
         </a>
         <a href="">
-          <AiOutlineShoppingCart className="nav-icons" />
+          <div className="cart-icon-container">
+            <AiOutlineShoppingCart className="nav-icons" />
+            {totalNoOfProducts > 0 && ( // Only show the badge if totalNoOfProducts is greater than 0
+              <span className="cart-badge">{totalNoOfProducts}</span>
+            )}
+          </div>
         </a>
         <a href="">
           <AiOutlineUserAdd className="nav-icons" />
+        </a>
+        <a onClick={handleSubmit}>
+          <IoIosLogOut className="nav-icons" />
         </a>
       </div>
     </nav>
