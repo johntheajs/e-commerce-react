@@ -16,7 +16,7 @@ const SignupPage = () => {
       await registerUser({ name, email, password });
       navigate("/"); // Redirect to login after successful signup
     } catch (err) {
-      setError(err.message);
+      setError("Enter correct Information");
     }
   };
 

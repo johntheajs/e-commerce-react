@@ -15,7 +15,7 @@ const LoginPage = () => {
       localStorage.setItem("token", token); // Store token in local storage
       navigate("/home"); // Redirect to home after login
     } catch (err) {
-      setError(err.message);
+      setError("Invalid email or password");
     }
   };
 
